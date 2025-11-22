@@ -1,9 +1,38 @@
 [project]
-name = "method-mcp-server"
-version = "0.1.0"
-description = "MCP server for Method CRM API integration"
+name = "method-crm-mcp"
+version = "1.0.0"
+description = "Production-ready Model Context Protocol (MCP) server for Method CRM API integration"
 readme = "README.md"
 requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "Avinash Sangle", email = "aavi.sangle@gmail.com"}
+]
+maintainers = [
+    {name = "Avinash Sangle", email = "aavi.sangle@gmail.com"}
+]
+keywords = [
+    "mcp",
+    "method-crm",
+    "model-context-protocol",
+    "fastmcp",
+    "api-integration",
+    "crm",
+    "method",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Office/Business",
+]
 dependencies = [
     "fastmcp>=0.2.0",
     "pydantic>=2.0.0",
@@ -11,6 +40,13 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "tenacity>=8.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/avisangle/method-crm-mcp"
+Documentation = "https://github.com/avisangle/method-crm-mcp#readme"
+Repository = "https://github.com/avisangle/method-crm-mcp"
+Issues = "https://github.com/avisangle/method-crm-mcp/issues"
+Changelog = "https://github.com/avisangle/method-crm-mcp/releases"
 
 [project.optional-dependencies]
 dev = [
@@ -20,8 +56,8 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_backend"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,0 +1,22 @@
+# Include documentation files
+include README.md
+include LICENSE
+include QUICKSTART.md
+include CONTRIBUTING.md
+
+# Include configuration files
+include pyproject.toml
+include .env.example
+
+# Include evaluation files
+recursive-include evaluations *.xml
+
+# Exclude development files
+exclude .gitignore
+exclude progress.md
+exclude bug.md
+exclude decisions.md
+exclude run_server.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .DS_Store
