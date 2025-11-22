@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation>
+  <metadata>
+    <title>Method CRM MCP Server Evaluation</title>
+    <description>
+      Comprehensive evaluation questions for testing Method CRM MCP server functionality.
+      These questions test the server's ability to handle realistic, complex workflows
+      involving multiple tools and deep data exploration.
+    </description>
+    <note>
+      These questions are designed for use with a Method CRM test account.
+      They use read-only operations and require realistic test data.
+    </note>
+  </metadata>
+
+  <qa_pair>
+    <question>
+      Using the Method CRM API, find all customers with 'Active' status who have at least one invoice with a total amount greater than $1000. What is the email address of the customer with the highest total invoice amount?
+    </question>
+    <answer>customer@example.com</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_query to find active customers
+      2. method_tables_query to find invoices > $1000 for each customer
+      3. Aggregation or manual calculation to find highest total
+      4. Extracting the email address from the winning customer record
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Query the Invoice table for all invoices created in January 2024. How many PDF files are attached to these invoices? (Search for files with .pdf extension linked to Invoice table)
+    </question>
+    <answer>15</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_query to find invoices with CreatedDate in January 2024
+      2. method_files_list filtered by link_table="Invoice" and filename_contains=".pdf"
+      3. Counting matching files for the invoice IDs from step 1
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Find the customer record with RecordId 'CUST-10001'. What is the value of their 'CompanyName' field? If the field is null or empty, answer with 'NONE'.
+    </question>
+    <answer>Acme Corporation</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_get with table="Customer" and record_id="CUST-10001"
+      2. Extracting the CompanyName field value
+      3. Handling null/empty values appropriately
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      List all event automation routines currently configured in the system. What is the name of the routine that triggers when a Customer record is created?
+    </question>
+    <answer>New Customer Welcome Email</answer>
+    <explanation>
+      This question requires:
+      1. method_events_list_routines to get all routines
+      2. Examining TriggerConfig for each routine
+      3. Finding the routine where trigger_config.event="record_created" and trigger_config.table="Customer"
+      4. Returning the Name field
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Query the Item table and find all items with 'Quantity' less than 10. Using aggregation, what is the sum of the 'Price' field for all these low-stock items? Round to 2 decimal places.
+    </question>
+    <answer>1234.56</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_query with table="Item" and filter="Quantity lt 10"
+      2. Using aggregate parameter: "sum(Price)" or manual calculation
+      3. Rounding the result to 2 decimal places
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Retrieve information about the currently authenticated user using the user info tool. What role does this user have in the Method CRM system? (Expected values: Administrator, User, Manager, etc.)
+    </question>
+    <answer>Administrator</answer>
+    <explanation>
+      This question requires:
+      1. method_user_get_info to retrieve current user information
+      2. Extracting the Role field from the response
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      List all API keys for this account. How many API keys have been created in total? (Check the 'total' field in pagination metadata)
+    </question>
+    <answer>3</answer>
+    <explanation>
+      This question requires:
+      1. method_apikeys_list to get all API keys
+      2. Reading the 'total' field from pagination metadata
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Find all files uploaded to the system that contain the word 'contract' in their filename. What is the FileId of the largest file (by size in bytes)?
+    </question>
+    <answer>FILE-2024-05-123</answer>
+    <explanation>
+      This question requires:
+      1. method_files_list with filename_contains="contract"
+      2. Examining the Size field for each file
+      3. Identifying the file with maximum size
+      4. Returning its Id/FileId field
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Query the Customer table for customers created after March 1, 2024, ordered by CreatedDate ascending. What is the RecordId of the very first customer created after this date?
+    </question>
+    <answer>CUST-20240301-001</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_query with table="Customer"
+      2. filter="CreatedDate gt '2024-03-01'"
+      3. orderby="CreatedDate asc"
+      4. top=1 to get only the first record
+      5. Extracting the RecordId field
+    </explanation>
+  </qa_pair>
+
+  <qa_pair>
+    <question>
+      Using the Invoice table, find all invoices with Status equal to 'Overdue'. Group them by customer (using CustomerRecordId field) and count how many customers have at least one overdue invoice. What is that count?
+    </question>
+    <answer>7</answer>
+    <explanation>
+      This question requires:
+      1. method_tables_query with table="Invoice" and filter="Status eq 'Overdue'"
+      2. Either using aggregate with groupby: "groupby((CustomerRecordId),aggregate($count as Total))"
+      3. Or manually extracting unique CustomerRecordId values and counting
+      4. Returning the count of unique customers
+    </explanation>
+  </qa_pair>
+
+</evaluation>
