@@ -4,7 +4,7 @@
 
 ```bash
 # 1. Clone and navigate to project
-git clone https://github.com/YOUR_USERNAME/method-crm-mcp.git
+git clone https://github.com/avisangle/method-crm-mcp.git
 cd method-crm-mcp
 
 # 2. Install dependencies

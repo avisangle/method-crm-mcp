@@ -25,7 +25,7 @@ A production-ready Model Context Protocol (MCP) server for Method CRM API integr
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/method-crm-mcp.git
+git clone https://github.com/avisangle/method-crm-mcp.git
 cd method-crm-mcp
 
 # Install dependencies
